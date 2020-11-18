@@ -74,6 +74,21 @@ public class Parser {
         }
     }
 
+    public static void writer2SingleFile(Map<String, List<String>> map) throws IOException{
+        String fileName = ".\\resource\\" + java.time.LocalDateTime.now().toString().replace('.', '-').replace(':', '-') + ".txt";
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, List<String>> e : map.entrySet()) {
+            sb.append(e.getKey() + " = [");
+            for (String s : e.getValue()) {
+                sb.append(s + " ");
+            }
+            sb.append("];\r\n");
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(new File(fileName)));
+        writer.write(sb.toString());
+        writer.close();
+    }
+
     public static String parsePort(String port) {
         if (PORT_NAME.isEmpty()) {
             for (Port p : Port.values()) {
